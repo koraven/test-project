@@ -10,8 +10,8 @@ COPY routes ./routes/
 COPY app.js ./
 COPY models ./models/
 
-FROM node:10.17.0-alpine AS release  
+FROM node:10.17.0 AS release  
 
 WORKDIR /app
 COPY --from=build /app ./
-CMD ["npm", "start"]
+CMD ["node", "app"]

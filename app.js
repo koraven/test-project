@@ -6,13 +6,13 @@ var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 
 //if port is undefined app app will start on default 3000
-port = process.env.PORT;
-//there is not default password. App will not start without it.
-const mongopass = process.env.MONGODB_PASS;
-const mongohost = process.env.MONGODB_HOST;
+const port = process.env.PORT;
 //other params might be provided for user, db, etc.
-
-mongoose.connect('mongodb://appuser:' + mongopass + '@' + mongohost + '/mytestdb');
+const connString = process.env.MONGODB_CONNSTRING;
+mongoose.connect(connString,{useNewUrlParser: true}).catch(error => {
+    console.error(error);
+    process.exit(1);    
+});
 var db = mongoose.connection;
 
 //handle mongo error
@@ -65,5 +65,5 @@ app.use(function (err, req, res, next) {
 });
 
 app.listen(port, function () {
-  console.log('Express app listening on port 3000');
+  console.log('Express app listening on port ' + port);
 });
