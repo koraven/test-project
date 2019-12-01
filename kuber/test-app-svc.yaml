@@ -1,0 +1,14 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: test-app-svc
+  labels:
+    app: test-app
+spec:
+  ports:
+  - port: 3000
+    targetPort: 3000
+  selector:
+    app: test-app
+  type: LoadBalancer
