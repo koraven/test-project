@@ -10,7 +10,7 @@ jobs:
 
   build:
 
-    runs-on: ec2-runner
+    runs-on: [self-hostd,ec2-runner]
 
     steps:
     - uses: actions/checkout@v3
